@@ -93,7 +93,7 @@ CREATE TABLE [dbo].[Account] (
   [AccountID] [INT] IDENTITY(1,1) NOT NULL,
   [UserName] [NVARCHAR](15) NOT NULL,
   [Password] [NVARCHAR](20) NOT NULL,
-  [Email] [NVARCHAR](15) NOT NULL,
+  [Email] [NVARCHAR](100) NOT NULL,
   [FullName] [NVARCHAR](50),
   [DOB] [Date] NOT NULL,
   [Address] [NVARCHAR](100),
@@ -130,8 +130,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Category] (
   [CategoryID] [INT] IDENTITY(1,1) NOT NULL,
-  [CategoryName] [NVARCHAR] NOT NULL,
-  [Description] [NVARCHAR] NOT NULL,
+  [CategoryName] [NVARCHAR](20) NOT NULL,
+  [Description] [NVARCHAR](100) NOT NULL,
 CONSTRAINT [PK_category] PRIMARY KEY CLUSTERED
     (
         [CategoryID] ASC
@@ -182,9 +182,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Insurance] (
   [InsuranceID] [INT] IDENTITY(1,1) NOT NULL,
+  [Number] [NVARCHAR](10) NOT NULL,
   [AccountID] [INT] NOT NULL,
-  [Type] [NVARCHAR] NOT NULL,
-  [Supplier] [NVARCHAR] NOT NULL,
+  [Type] [NVARCHAR](50) NOT NULL,
+  [Supplier] [NVARCHAR](100) NOT NULL,
   [Percent] [DECIMAL] NOT NULL,
   CONSTRAINT [PK_insurance] PRIMARY KEY CLUSTERED
     (
@@ -256,13 +257,14 @@ VALUES
   (5, '2023-05-05', '2023-05-06', 150.00);
 
 -- Insert data into the [Insurance] table
-INSERT INTO [dbo].[Insurance] ([AccountID], [Type], [Supplier], [Percent])
+-- Insert data into the [Insurance] table
+INSERT INTO [dbo].[Insurance] ([Number], [AccountID], [Type], [Supplier], [Percent])
 VALUES
-  (1, 'Type1', 'Supplier1', 10.00),
-  (2, 'Type2', 'Supplier2', 15.00),
-  (3, 'Type1', 'Supplier1', 20.00),
-  (4, 'Type2', 'Supplier2', 25.00),
-  (5, 'Type1', 'Supplier1', 30.00);
+  ('INS001', 1, 'Type1', 'Supplier1', 10.00),
+  ('INS002', 2, 'Type2', 'Supplier2', 15.00),
+  ('INS003', 3, 'Type1', 'Supplier1', 20.00),
+  ('INS004', 4, 'Type2', 'Supplier2', 25.00),
+  ('INS005', 5, 'Type1', 'Supplier1', 30.00);
 
 
 USE [master]

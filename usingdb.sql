@@ -1,0 +1,271 @@
+﻿USE [master]
+GO
+/****** Object:  Database [MyStore]    Script Date: 10/26/2022 8:38:04 PM ******/
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'MyStore')
+BEGIN
+	ALTER DATABASE [MyStore] SET OFFLINE WITH ROLLBACK IMMEDIATE;
+	ALTER DATABASE [MyStore] SET ONLINE;
+	DROP DATABASE [MyStore];
+END
+GO
+CREATE DATABASE [MyStore]
+GO
+ALTER DATABASE [MyStore] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [MyStore].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [MyStore] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [MyStore] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [MyStore] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [MyStore] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [MyStore] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [MyStore] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [MyStore] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [MyStore] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [MyStore] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [MyStore] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [MyStore] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [MyStore] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [MyStore] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [MyStore] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [MyStore] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [MyStore] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [MyStore] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [MyStore] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [MyStore] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [MyStore] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [MyStore] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [MyStore] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [MyStore] SET RECOVERY FULL 
+GO
+ALTER DATABASE [MyStore] SET  MULTI_USER 
+GO
+ALTER DATABASE [MyStore] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [MyStore] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [MyStore] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [MyStore] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [MyStore] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [MyStore] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'MyStore', N'ON'
+GO
+ALTER DATABASE [MyStore] SET QUERY_STORE = OFF
+GO
+USE [MyStore]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Account] (
+  [AccountID] [INT] IDENTITY(1,1) NOT NULL,
+  [UserName] [NVARCHAR](15) NOT NULL,
+  [Password] [NVARCHAR](20) NOT NULL,
+  [Email] [NVARCHAR](15) NOT NULL,
+  [FullName] [NVARCHAR](50),
+  [DOB] [Date] NOT NULL,
+  [Address] [NVARCHAR](100),
+  [Phone] [NVARCHAR](12),
+  [CCCD] [NVARCHAR](15) NOT NULL,
+  [Age] [INT] NOT NULL,
+  [Type] [BIT] NOT NULL,
+CONSTRAINT [PK_account] PRIMARY KEY CLUSTERED
+    (
+        [AccountID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Patient] (
+  [PatientID] [INT] IDENTITY(1,1) NOT NULL,
+  [AccountID] [INT] NOT NULL,
+  [TreatMentType] [INT] NOT NULL,
+  [Date] [Date] NOT NULL,
+CONSTRAINT [PK_patient] PRIMARY KEY CLUSTERED
+    (
+        [PatientID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Category] (
+  [CategoryID] [INT] IDENTITY(1,1) NOT NULL,
+  [CategoryName] [NVARCHAR] NOT NULL,
+  [Description] [NVARCHAR] NOT NULL,
+CONSTRAINT [PK_category] PRIMARY KEY CLUSTERED
+    (
+        [CategoryID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Fee] (
+  [FeeID] [INT] IDENTITY(1,1) NOT NULL,
+  [PatientID] [INT] NOT NULL,
+  [RequiredDate] DATE,
+  [PayedDate] DATE,
+  [Total] [DECIMAL] NOT NULL,
+ CONSTRAINT [PK_fee] PRIMARY KEY CLUSTERED
+    (
+	    [FeeID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payment] (
+  [PaymentID] [INT] IDENTITY(1,1) NOT NULL,
+  [CategoryID] [INT] NOT NULL,
+  [RequiredDate] DATE,
+  [PayedDate] DATE,
+  [Total] [DECIMAL] NOT NULL,
+ CONSTRAINT [PK_payment] PRIMARY KEY CLUSTERED
+    (
+	    [PaymentID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Insurance] (
+  [InsuranceID] [INT] IDENTITY(1,1) NOT NULL,
+  [AccountID] [INT] NOT NULL,
+  [Type] [NVARCHAR] NOT NULL,
+  [Supplier] [NVARCHAR] NOT NULL,
+  [Percent] [DECIMAL] NOT NULL,
+  CONSTRAINT [PK_insurance] PRIMARY KEY CLUSTERED
+    (
+	    [InsuranceID] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+ALTER TABLE [dbo].[Patient]  WITH CHECK ADD FOREIGN KEY([AccountID])
+REFERENCES [dbo].[Account] ([AccountID])
+GO
+
+ALTER TABLE [dbo].[Fee]  WITH CHECK ADD FOREIGN KEY([PatientID])
+REFERENCES [dbo].[Patient] ([PatientID])
+GO
+
+ALTER TABLE [dbo].[Insurance]  WITH CHECK ADD FOREIGN KEY([AccountID])
+REFERENCES [dbo].[Account] ([AccountID])
+GO
+
+ALTER TABLE [dbo].[Payment]  WITH CHECK ADD FOREIGN KEY([CategoryID])
+REFERENCES [dbo].[Category] ([CategoryID])
+GO
+
+-- Insert data into the [Account] table
+INSERT INTO [dbo].[Account] ([UserName], [Password], [Email], [FullName], [DOB], [Address], [Phone], [CCCD], [Age], [Type])
+VALUES
+  ('user1', 'pass1', 'user1@example.com', 'John Doe', '1990-01-01', '123 Street, City', '1234567890', '123456789', 30, 1),
+  ('user2', 'pass2', 'user2@example.com', 'Jane Smith', '1992-02-02', '456 Avenue, Town', '9876543210', '987654321', 28, 0),
+  ('user3', 'pass3', 'user3@example.com', 'Michael Johnson', '1985-03-03', '789 Road, Village', '5555555555', '555555555', 36, 1),
+  ('user4', 'pass4', 'user4@example.com', 'Emily Davis', '1988-04-04', '321 Lane, County', '9999999999', '999999999', 33, 0),
+  ('user5', 'pass5', 'user5@example.com', 'Sarah Wilson', '1995-05-05', '654 Drive, State', '1111111111', '111111111', 26, 1);
+
+-- Insert data into the [Patient] table
+INSERT INTO [dbo].[Patient] ([AccountID], [TreatMentType], [Date])
+VALUES
+  (1, 1, '2023-01-01'),
+  (2, 2, '2023-02-02'),
+  (3, 1, '2023-03-03'),
+  (4, 2, '2023-04-04'),
+  (5, 1, '2023-05-05');
+
+-- Insert data into the [Category] table
+INSERT INTO [dbo].[Category] ([CategoryName], [Description])
+VALUES
+  ('Category1', 'Description 1'),
+  ('Category2', 'Description 2'),
+  ('Category3', 'Description 3'),
+  ('Category4', 'Description 4'),
+  ('Category5', 'Description 5');
+
+-- Insert data into the [Fee] table
+INSERT INTO [dbo].[Fee] ([PatientID], [RequiredDate], [PayedDate], [Total])
+VALUES
+  (1, '2023-01-01', '2023-01-02', 100.00),
+  (2, '2023-02-02', '2023-02-03', 200.00),
+  (3, '2023-03-03', '2023-03-04', 150.00),
+  (4, '2023-04-04', '2023-04-05', 300.00),
+  (5, '2023-05-05', '2023-05-06', 250.00);
+
+-- Insert data into the [Payment] table
+INSERT INTO [dbo].[Payment] ([CategoryID], [RequiredDate], [PayedDate], [Total])
+VALUES
+  (1, '2023-01-01', '2023-01-02', 50.00),
+  (2, '2023-02-02', '2023-02-03', 75.00),
+  (3, '2023-03-03', '2023-03-04', 100.00),
+  (4, '2023-04-04', '2023-04-05', 125.00),
+  (5, '2023-05-05', '2023-05-06', 150.00);
+
+-- Insert data into the [Insurance] table
+INSERT INTO [dbo].[Insurance] ([AccountID], [Type], [Supplier], [Percent])
+VALUES
+  (1, 'Type1', 'Supplier1', 10.00),
+  (2, 'Type2', 'Supplier2', 15.00),
+  (3, 'Type1', 'Supplier1', 20.00),
+  (4, 'Type2', 'Supplier2', 25.00),
+  (5, 'Type1', 'Supplier1', 30.00);
+
+
+USE [master]
+GO
+ALTER DATABASE [MyStore] SET  READ_WRITE 
+GO

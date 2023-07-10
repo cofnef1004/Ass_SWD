@@ -100,7 +100,7 @@ CREATE TABLE [dbo].[Staff] (
   [Address] [NVARCHAR](100),
   [Phone] [NVARCHAR](12),
   [NumberID] [NVARCHAR](15) NOT NULL,
-  [Role] NVARCHAR(40) CHECK ([Role] IN ('Admin', 'Doctor', 'Nurse', 'Receptionist', 'Other')),
+  [Role] NVARCHAR(40) CHECK ([Role] IN ('Admin', 'Staff')),
 CONSTRAINT [PK_staff] PRIMARY KEY CLUSTERED
     (
         [StaffID] ASC
@@ -264,11 +264,12 @@ GO
 
 INSERT INTO [dbo].[Staff] ([UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role])
 VALUES
+  ('duy', '123', 'john@example.com', 'John Smith', 'Male', '1990-05-15', '123 Main St', '123-456-7890', '1234567890', 'Staff'),
   ('johnsmith', 'password1', 'john@example.com', 'John Smith', 'Male', '1990-05-15', '123 Main St', '123-456-7890', '1234567890', 'Admin'),
-  ('janedoe', 'password2', 'jane@example.com', 'Jane Doe', 'Female', '1988-10-20', '456 Elm St', '987-654-3210', '0987654321', 'Doctor'),
-  ('mikesmith', 'password3', 'mike@example.com', 'Mike Smith', 'Male', '1992-03-25', '789 Oak St', '555-555-5555', '9876543210', 'Nurse'),
-  ('sarahjones', 'password4', 'sarah@example.com', 'Sarah Jones', 'Female', '1995-07-08', '321 Pine St', '111-222-3333', '0123456789', 'Receptionist'),
-  ('markwilson', 'password5', 'mark@example.com', 'Mark Wilson', 'Male', '1991-12-01', '567 Maple St', '444-444-4444', '5678901234', 'Other');
+  ('janedoe', 'password2', 'jane@example.com', 'Jane Doe', 'Female', '1988-10-20', '456 Elm St', '987-654-3210', '0987654321', 'Staff'),
+  ('mikesmith', 'password3', 'mike@example.com', 'Mike Smith', 'Male', '1992-03-25', '789 Oak St', '555-555-5555', '9876543210', 'Staff'),
+  ('sarahjones', 'password4', 'sarah@example.com', 'Sarah Jones', 'Female', '1995-07-08', '321 Pine St', '111-222-3333', '0123456789', 'Staff'),
+  ('markwilson', 'password5', 'mark@example.com', 'Mark Wilson', 'Male', '1991-12-01', '567 Maple St', '444-444-4444', '5678901234', 'Staff');
 
 INSERT INTO [dbo].[Patient] ([FullName], [Gender], [DOB], [Address], [Phone], [NumberID])
 VALUES

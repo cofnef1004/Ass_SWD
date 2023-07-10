@@ -6,11 +6,12 @@ namespace Ass_SWD.Models
     public partial class Fee
     {
         public int FeeId { get; set; }
-        public int PatientId { get; set; }
-        public DateTime? RequiredDate { get; set; }
-        public DateTime? PayedDate { get; set; }
-        public decimal Total { get; set; }
+        public int RecordId { get; set; }
+        public DateTime? PaymentDate { get; set; }
+        public DateTime? PaiedDate { get; set; }
+        public decimal Amount { get; set; }
+        public string? Method { get; set; }
 
-        public virtual Patient Patient { get; set; } = null!;
+        public virtual Record Record { get; set; } = null!;
     }
 }

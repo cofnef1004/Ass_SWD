@@ -7,15 +7,19 @@ namespace Ass_SWD.Models
     {
         public Patient()
         {
-            Fees = new HashSet<Fee>();
+            Insurances = new HashSet<Insurance>();
+            Records = new HashSet<Record>();
         }
 
         public int PatientId { get; set; }
-        public int AccountId { get; set; }
-        public int TreatMentType { get; set; }
-        public DateTime Date { get; set; }
+        public string? FullName { get; set; }
+        public string? Gender { get; set; }
+        public DateTime Dob { get; set; }
+        public string? Address { get; set; }
+        public string? Phone { get; set; }
+        public string NumberId { get; set; } = null!;
 
-        public virtual Account Account { get; set; } = null!;
-        public virtual ICollection<Fee> Fees { get; set; }
+        public virtual ICollection<Insurance> Insurances { get; set; }
+        public virtual ICollection<Record> Records { get; set; }
     }
 }

@@ -1,0 +1,53 @@
+﻿@page
+@model Ass_SWD.Pages.Insurance.IndexModel
+@{
+    Layout = "_MainLayout";
+}
+<h1>Insurance Connected</h1>
+
+<p>
+    <a asp-route-id="@Model.Id" asp-page="Create">Connect New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Insurances[0].Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Insurances[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Insurances[0].Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Insurances[0].Percent)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Insurances)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Percent)
+                </td>
+                
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.InsuranceId">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.InsuranceId">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

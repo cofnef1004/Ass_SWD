@@ -1,9 +1,9 @@
 ﻿@page
-@model Ass_SWD.Pages.Insurance.CreateModel
+@model Ass_SWD.Pages.Insurance.EditModel
 @{
     Layout = "_MainLayout";
 }
-<h1>Connect Insurance</h1>
+<h1>Edit Insurance</h1>
 
 <h4>Insurance</h4>
 <hr />
@@ -13,32 +13,32 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Insurance.Number" class="control-label"></label>
-                <input asp-for="Insurance.Number" class="form-control" />
+                <input asp-for="Insurance.Number" class="form-control" value="@Model.Insurance.Number" disabled />
                 <span asp-validation-for="Insurance.Number" class="text-danger"></span>
             </div>
 
             <div class="form-group" style="display:none">
                 <label asp-for="Insurance.PatientId" class="control-label"></label>
-                <input asp-for="Insurance.PatientId" class="form-control" value="@Model.Id" />
+                <input asp-for="Insurance.PatientId" class="form-control" value="@Model.Insurance.PatientId" />
                 <span asp-validation-for="Insurance.Number" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Insurance.Type" class="control-label"></label>
                 <select asp-for="Insurance.Type" class="form-control" asp-items="ViewBag.type"></select>
             </div>
-           
+
             <div class="form-group">
                 <label asp-for="Insurance.Supplier" class="control-label"></label>
-                <input asp-for="Insurance.Supplier" class="form-control" />
+                <input asp-for="Insurance.Supplier" class="form-control" value="@Model.Insurance.Supplier" />
                 <span asp-validation-for="Insurance.Supplier" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Insurance.Percent" class="control-label"></label>
+                <label asp-for="Insurance.Percent" class="control-label" value="@Model.Insurance.Percent"></label>
                 <input asp-for="Insurance.Percent" class="form-control" />
                 <span asp-validation-for="Insurance.Percent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                
+
                 <span style="color:red">@ViewBag.notice</span>
             </div>
             <br />

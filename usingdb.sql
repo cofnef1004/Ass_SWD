@@ -214,6 +214,7 @@ GO
 -- Insert data into the [Account] table
 INSERT INTO [dbo].[Account] ([UserName], [Password], [Email], [FullName], [DOB], [Address], [Phone], [CCCD], [Age], [Type])
 VALUES
+('duy', '123', 'user1@example.com', 'John Doe', '1990-01-01', '123 Street, City', '1234567890', '123456789', 30, 1),
   ('user1', 'pass1', 'user1@example.com', 'John Doe', '1990-01-01', '123 Street, City', '1234567890', '123456789', 30, 1),
   ('user2', 'pass2', 'user2@example.com', 'Jane Smith', '1992-02-02', '456 Avenue, Town', '9876543210', '987654321', 28, 0),
   ('user3', 'pass3', 'user3@example.com', 'Michael Johnson', '1985-03-03', '789 Road, Village', '5555555555', '555555555', 36, 1),

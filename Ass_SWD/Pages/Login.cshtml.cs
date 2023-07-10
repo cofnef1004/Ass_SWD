@@ -23,9 +23,9 @@ namespace Ass_SWD.Pages
             {
                 using (var db = new MyStoreContext())
                 {
-                    var acc = db.Accounts.FirstOrDefault(acc => acc.UserName.Equals(Username) && acc.Password.Equals(Password));
+                    var acc = db.Employees.FirstOrDefault(acc => acc.UserName.Equals(Username) && acc.Password.Equals(Password));
                     if (acc == null) return Page();
-                    var sessionStr = acc.Type ? "staff" : "customer";
+                    var sessionStr = acc.Role.Equals("Admin") ? "admin" : "staff";
                     var accJson = JsonSerializer.Serialize(acc);
                     HttpContext.Session.SetString(sessionStr, accJson.ToString());
                     return RedirectToPage("/Index");

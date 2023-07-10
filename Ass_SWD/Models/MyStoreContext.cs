@@ -17,13 +17,13 @@ namespace Ass_SWD.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Fee> Fees { get; set; } = null!;
         public virtual DbSet<Insurance> Insurances { get; set; } = null!;
         public virtual DbSet<Patient> Patients { get; set; } = null!;
         public virtual DbSet<Payment> Payments { get; set; } = null!;
         public virtual DbSet<Record> Records { get; set; } = null!;
         public virtual DbSet<Service> Services { get; set; } = null!;
-        public virtual DbSet<staff> staff { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,7 +35,6 @@ namespace Ass_SWD.Models
                 optionsBuilder.UseSqlServer(conf.GetConnectionString("MyCnn"));
             }
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>(entity =>
@@ -47,6 +46,40 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.CategoryName).HasMaxLength(20);
 
                 entity.Property(e => e.Description).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Employee>(entity =>
+            {
+                entity.ToTable("Employee");
+
+                entity.HasIndex(e => e.UserName, "UQ__Employee__C9F2845664BB23B7")
+                    .IsUnique();
+
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+                entity.Property(e => e.Address).HasMaxLength(100);
+
+                entity.Property(e => e.Dob)
+                    .HasColumnType("date")
+                    .HasColumnName("DOB");
+
+                entity.Property(e => e.Email).HasMaxLength(100);
+
+                entity.Property(e => e.FullName).HasMaxLength(50);
+
+                entity.Property(e => e.Gender).HasMaxLength(10);
+
+                entity.Property(e => e.NumberId)
+                    .HasMaxLength(15)
+                    .HasColumnName("NumberID");
+
+                entity.Property(e => e.Password).HasMaxLength(20);
+
+                entity.Property(e => e.Phone).HasMaxLength(12);
+
+                entity.Property(e => e.Role).HasMaxLength(40);
+
+                entity.Property(e => e.UserName).HasMaxLength(15);
             });
 
             modelBuilder.Entity<Fee>(entity =>
@@ -197,40 +230,6 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.Name).HasMaxLength(100);
 
                 entity.Property(e => e.Type).HasMaxLength(40);
-            });
-
-            modelBuilder.Entity<staff>(entity =>
-            {
-                entity.ToTable("Staff");
-
-                entity.HasIndex(e => e.UserName, "UQ__Staff__C9F284565AAE82B9")
-                    .IsUnique();
-
-                entity.Property(e => e.StaffId).HasColumnName("StaffID");
-
-                entity.Property(e => e.Address).HasMaxLength(100);
-
-                entity.Property(e => e.Dob)
-                    .HasColumnType("date")
-                    .HasColumnName("DOB");
-
-                entity.Property(e => e.Email).HasMaxLength(100);
-
-                entity.Property(e => e.FullName).HasMaxLength(50);
-
-                entity.Property(e => e.Gender).HasMaxLength(10);
-
-                entity.Property(e => e.NumberId)
-                    .HasMaxLength(15)
-                    .HasColumnName("NumberID");
-
-                entity.Property(e => e.Password).HasMaxLength(20);
-
-                entity.Property(e => e.Phone).HasMaxLength(12);
-
-                entity.Property(e => e.Role).HasMaxLength(40);
-
-                entity.Property(e => e.UserName).HasMaxLength(15);
             });
 
             OnModelCreatingPartial(modelBuilder);

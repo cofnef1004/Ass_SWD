@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ass_SWD.Model
+namespace Ass_SWD.Models
 {
-    public partial class staffs
+    public partial class Employee
     {
-        public int StaffId { get; set; }
+        public int EmployeeId { get; set; }
         public string UserName { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string Email { get; set; } = null!;

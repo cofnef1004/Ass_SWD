@@ -89,8 +89,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Staff] (
-  [StaffID] [INT] IDENTITY(1,1) NOT NULL,
+CREATE TABLE [dbo].[Employee] (
+  [EmployeeId] [INT] IDENTITY(1,1) NOT NULL,
   [UserName] [NVARCHAR](15) NOT NULL UNIQUE,
   [Password] [NVARCHAR](20) NOT NULL,
   [Email] [NVARCHAR](100) NOT NULL,
@@ -101,9 +101,9 @@ CREATE TABLE [dbo].[Staff] (
   [Phone] [NVARCHAR](12),
   [NumberID] [NVARCHAR](15) NOT NULL,
   [Role] NVARCHAR(40) CHECK ([Role] IN ('Admin', 'Staff')),
-CONSTRAINT [PK_staff] PRIMARY KEY CLUSTERED
+CONSTRAINT [PK_emp] PRIMARY KEY CLUSTERED
     (
-        [StaffID] ASC
+        [EmployeeId] ASC
     )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -262,7 +262,7 @@ ALTER TABLE [dbo].[Payment]  WITH CHECK ADD FOREIGN KEY([CategoryID])
 REFERENCES [dbo].[Category] ([CategoryID])
 GO
 
-INSERT INTO [dbo].[Staff] ([UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role])
+INSERT INTO [dbo].[Employee] ([UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role])
 VALUES
   ('duy', '123', 'john@example.com', 'John Smith', 'Male', '1990-05-15', '123 Main St', '123-456-7890', '1234567890', 'Staff'),
   ('johnsmith', 'password1', 'john@example.com', 'John Smith', 'Male', '1990-05-15', '123 Main St', '123-456-7890', '1234567890', 'Admin'),

@@ -34,6 +34,7 @@ namespace Ass_SWD.Pages.Insurance
                 {
                     ViewData["notice"] = "Insurance already exist";
                     ViewData["type"] = new SelectList(type);
+                    Id = Insurance.PatientId;
                     return Page();
                 }
                 ViewData["notice"] = "Insurance success";

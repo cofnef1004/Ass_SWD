@@ -23,7 +23,7 @@ namespace Ass_SWD.Pages
             {
                 using (var db = new MyStoreContext())
                 {
-                    var acc = db.Employees.FirstOrDefault(acc => acc.UserName.Equals(Username) && acc.Password.Equals(Password));
+                    var acc = db.Users.FirstOrDefault(acc => acc.UserName.Equals(Username) && acc.Password.Equals(Password));
                     if (acc == null) return Page();
                     var sessionStr = acc.Role.Equals("Admin") ? "admin" : "staff";
                     var accJson = JsonSerializer.Serialize(acc);

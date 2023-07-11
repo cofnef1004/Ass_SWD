@@ -17,13 +17,13 @@ namespace Ass_SWD.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
-        public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Fee> Fees { get; set; } = null!;
         public virtual DbSet<Insurance> Insurances { get; set; } = null!;
         public virtual DbSet<Patient> Patients { get; set; } = null!;
         public virtual DbSet<Payment> Payments { get; set; } = null!;
         public virtual DbSet<Record> Records { get; set; } = null!;
         public virtual DbSet<Service> Services { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,40 +48,6 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.Description).HasMaxLength(100);
             });
 
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.ToTable("Employee");
-
-                entity.HasIndex(e => e.UserName, "UQ__Employee__C9F2845664BB23B7")
-                    .IsUnique();
-
-                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
-
-                entity.Property(e => e.Address).HasMaxLength(100);
-
-                entity.Property(e => e.Dob)
-                    .HasColumnType("date")
-                    .HasColumnName("DOB");
-
-                entity.Property(e => e.Email).HasMaxLength(100);
-
-                entity.Property(e => e.FullName).HasMaxLength(50);
-
-                entity.Property(e => e.Gender).HasMaxLength(10);
-
-                entity.Property(e => e.NumberId)
-                    .HasMaxLength(15)
-                    .HasColumnName("NumberID");
-
-                entity.Property(e => e.Password).HasMaxLength(20);
-
-                entity.Property(e => e.Phone).HasMaxLength(12);
-
-                entity.Property(e => e.Role).HasMaxLength(40);
-
-                entity.Property(e => e.UserName).HasMaxLength(15);
-            });
-
             modelBuilder.Entity<Fee>(entity =>
             {
                 entity.ToTable("Fee");
@@ -102,7 +68,7 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Fees)
                     .HasForeignKey(d => d.RecordId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Fee__RecordID__398D8EEE");
+                    .HasConstraintName("FK__Fee__RecordID__32E0915F");
             });
 
             modelBuilder.Entity<Insurance>(entity =>
@@ -125,7 +91,7 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Insurances)
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Insurance__Patie__3A81B327");
+                    .HasConstraintName("FK__Insurance__Patie__33D4B598");
             });
 
             modelBuilder.Entity<Patient>(entity =>
@@ -159,15 +125,11 @@ namespace Ass_SWD.Models
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
 
+                entity.Property(e => e.BillingInformation).HasMaxLength(100);
+
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
-
-                entity.Property(e => e.Partner).HasMaxLength(100);
-
                 entity.Property(e => e.PayedDate).HasColumnType("date");
-
-                entity.Property(e => e.RequiredDate).HasColumnType("date");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
@@ -175,7 +137,7 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Payment__Categor__3B75D760");
+                    .HasConstraintName("FK__Payment__Categor__34C8D9D1");
             });
 
             modelBuilder.Entity<Record>(entity =>
@@ -210,13 +172,13 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Records)
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Record__PatientI__37A5467C");
+                    .HasConstraintName("FK__Record__PatientI__35BCFE0A");
 
                 entity.HasOne(d => d.Service)
                     .WithMany(p => p.Records)
                     .HasForeignKey(d => d.ServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Record__ServiceI__38996AB5");
+                    .HasConstraintName("FK__Record__ServiceI__36B12243");
             });
 
             modelBuilder.Entity<Service>(entity =>
@@ -230,6 +192,38 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.Name).HasMaxLength(100);
 
                 entity.Property(e => e.Type).HasMaxLength(40);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("User");
+
+                entity.HasIndex(e => e.UserName, "UQ__User__C9F284568A929957")
+                    .IsUnique();
+
+                entity.Property(e => e.Address).HasMaxLength(100);
+
+                entity.Property(e => e.Dob)
+                    .HasColumnType("date")
+                    .HasColumnName("DOB");
+
+                entity.Property(e => e.Email).HasMaxLength(100);
+
+                entity.Property(e => e.FullName).HasMaxLength(50);
+
+                entity.Property(e => e.Gender).HasMaxLength(10);
+
+                entity.Property(e => e.NumberId)
+                    .HasMaxLength(15)
+                    .HasColumnName("NumberID");
+
+                entity.Property(e => e.Password).HasMaxLength(20);
+
+                entity.Property(e => e.Phone).HasMaxLength(12);
+
+                entity.Property(e => e.Role).HasMaxLength(40);
+
+                entity.Property(e => e.UserName).HasMaxLength(15);
             });
 
             OnModelCreatingPartial(modelBuilder);

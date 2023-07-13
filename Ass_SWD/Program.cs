@@ -8,18 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddTransient<IPatientRepository, PatientRepository>().AddDbContext<MyStoreContext>(opt =>
+builder.Services.AddTransient<IPatientRepository, PatientRepository>().AddDbContext<Ass_SWD.Models.MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("DB"));
 
-builder.Services.AddTransient<IRecordRepository, RecordRepository>().AddDbContext<MyStoreContext>(opt =>
+builder.Services.AddTransient<IRecordRepository, RecordRepository>().AddDbContext<Ass_SWD.Models.MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("DB"));
 
 
-builder.Services.AddTransient<IFeeRepository, FeeRepository>().AddDbContext<MyStoreContext>(opt =>
+builder.Services.AddTransient<IFeeRepository, FeeRepository>().AddDbContext<Ass_SWD.Models.MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("DB"));
 
-builder.Services.AddDbContext<MyStoreContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
-builder.Services.AddScoped<MyStoreContext>();
+builder.Services.AddDbContext<Ass_SWD.Models.MyStoreContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
+builder.Services.AddScoped<Ass_SWD.Models.MyStoreContext>();
 
 builder.Services.AddSignalR();
 

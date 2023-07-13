@@ -8,13 +8,9 @@
 
   <ItemGroup>
     <Compile Remove="Bussiness\**" />
-    <Compile Remove="DataAccess\**" />
     <Content Remove="Bussiness\**" />
-    <Content Remove="DataAccess\**" />
     <EmbeddedResource Remove="Bussiness\**" />
-    <EmbeddedResource Remove="DataAccess\**" />
     <None Remove="Bussiness\**" />
-    <None Remove="DataAccess\**" />
   </ItemGroup>
 
   <ItemGroup>

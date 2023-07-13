@@ -17,6 +17,37 @@
         <input name="Password" style="width:300px" type="password" class="form-control" id="exampleInputPassword1">
     </div>
 
+     <div class="mb-3" style="display:none">
+        <input name="validate" value="@Model.validate" style="width:300px" type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <div id="image-container"></div>
+    <div class="mb-3">
+        <label class="form-label">Capcha</label>
+        <input name="CapchaInput" style="width:300px;" type="text" class="form-control" id="exampleInputPassword1">
+    </div>
     <button type="submit" class="btn btn-primary">Login</button>
 
+    <div class="mb-3" style="color:red">@ViewBag.notice</div>
 </form>
+
+<script>
+    function displayStringAsImage(str) {
+        const width = 150;
+        const height = 50;
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'aqua';
+        ctx.fillRect(0, 0, width, height);
+        ctx.font = '20px Arial';
+        ctx.fillStyle = '#000';
+        ctx.fillText(str, 10, 30);
+        const dataUrl = canvas.toDataURL();
+        const img = document.createElement('img');
+        img.src = dataUrl;
+        document.getElementById('image-container').appendChild(img);
+    }
+    displayStringAsImage('@Model.capCha');
+</script>

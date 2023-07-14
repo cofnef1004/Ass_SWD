@@ -47,6 +47,9 @@
 						<a asp-page="./UpdatePatients" asp-route-id="@patient.PatientId" class="btn btn-primary">Update</a>
 					</div>
 					<div style="margin-top:10px">
+						<a asp-page="./Insurance/Index" asp-route-id="@patient.PatientId" class="btn btn-primary">Insurances</a>
+					</div>
+					<div style="margin-top:10px">
 						<form method="post" asp-page-handler="Delete" asp-route-id="@patient.PatientId">
 							<button type="submit" class="btn btn-danger">Delete</button>
 						</form>

@@ -53,7 +53,7 @@ namespace Ass_SWD.Pages
                     var sessionStr = acc.Role.Equals("Admin") ? "admin" : "staff";
                     var accJson = JsonSerializer.Serialize(acc);
                     HttpContext.Session.SetString(sessionStr, accJson.ToString());
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/Patients");
                 }
 
             }

@@ -10,5 +10,7 @@ namespace Ass_SWD.Bussiness.Interface
         public void UpdatePatient(Patient patient);
         void DeletePatient(Patient patient);
 
+        void connectInsurance(Insurance insurance);
+        void modify(Insurance insurance);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Ass_SWD.Business.Interface;
-using Ass_SWD.DataAccess.Models;
+using Ass_SWD.Models;
 
 namespace Ass_SWD.Business.Repository
 {
@@ -12,7 +12,7 @@ namespace Ass_SWD.Business.Repository
             _storeContext = storeContext;
         }
 
-        public void AddPayment(Models.Payment payment)
+        public void AddPayment(Payment payment)
         {
             _storeContext.Payments.Add(payment);
             _storeContext.SaveChanges();

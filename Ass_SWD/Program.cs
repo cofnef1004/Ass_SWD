@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Ass_SWD.Bussiness.Interface;
 using Ass_SWD.Bussiness.Repository;
 using Ass_SWD.DataAccess.Models;
+using Ass_SWD.Business.Interface;
+using Ass_SWD.Business.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,10 @@ builder.Services.AddTransient<IRecordRepository, RecordRepository>().AddDbContex
 
 
 builder.Services.AddTransient<IFeeRepository, FeeRepository>().AddDbContext<Ass_SWD.DataAccess.Models.MyStoreContext>(opt =>
+    builder.Configuration.GetConnectionString("MyCnn"));
+
+
+builder.Services.AddTransient<IPaymentService, PaymentService>().AddDbContext<Ass_SWD.DataAccess.Models.MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("MyCnn"));
 
 builder.Services.AddDbContext<Ass_SWD.Models.MyStoreContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));

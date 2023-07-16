@@ -13,7 +13,7 @@ namespace Ass_SWD.Pages.Payments
         public List<Category> paymentsGroupByCateID { get; set; }
 
         [BindProperty]
-        public Models.Payment PaymentEntity { get; set; } = default!;
+        public Payment PaymentEntity { get; set; } = default!;
 
        
         

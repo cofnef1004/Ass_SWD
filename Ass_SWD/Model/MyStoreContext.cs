@@ -47,8 +47,8 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.Description).HasMaxLength(100);
             });
 
-<<<<<<< HEAD:Ass_SWD/Models/MyStoreContext.cs
-            modelBuilder.Entity<Employee>(entity =>
+
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Employee");
 
@@ -80,8 +80,7 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.UserName).HasMaxLength(15);
             });
 
-=======
->>>>>>> 530c47ec22469e0f421194d4574a3f0eff60453a:Ass_SWD/Model/MyStoreContext.cs
+
             modelBuilder.Entity<Fee>(entity =>
             {
                 entity.ToTable("Fee");
@@ -102,11 +101,10 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Fees)
                     .HasForeignKey(d => d.RecordId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-<<<<<<< HEAD:Ass_SWD/Models/MyStoreContext.cs
-                    .HasConstraintName("FK__Fee__RecordID__4CA06362");
-=======
+
+                    .HasConstraintName("FK__Fee__RecordID__4CA06362")
                     .HasConstraintName("FK__Fee__RecordID__32E0915F");
->>>>>>> 530c47ec22469e0f421194d4574a3f0eff60453a:Ass_SWD/Model/MyStoreContext.cs
+
             });
 
             modelBuilder.Entity<Insurance>(entity =>
@@ -129,11 +127,11 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Insurances)
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-<<<<<<< HEAD:Ass_SWD/Models/MyStoreContext.cs
-                    .HasConstraintName("FK__Insurance__Patie__4D94879B");
-=======
+
+                    .HasConstraintName("FK__Insurance__Patie__4D94879B")
+
                     .HasConstraintName("FK__Insurance__Patie__33D4B598");
->>>>>>> 530c47ec22469e0f421194d4574a3f0eff60453a:Ass_SWD/Model/MyStoreContext.cs
+
             });
 
             modelBuilder.Entity<Patient>(entity =>
@@ -179,11 +177,11 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-<<<<<<< HEAD:Ass_SWD/Models/MyStoreContext.cs
-                    .HasConstraintName("FK__Payment__Categor__4E88ABD4");
-=======
+
+                    .HasConstraintName("FK__Payment__Categor__4E88ABD4")
+
                     .HasConstraintName("FK__Payment__Categor__34C8D9D1");
->>>>>>> 530c47ec22469e0f421194d4574a3f0eff60453a:Ass_SWD/Model/MyStoreContext.cs
+
             });
 
             modelBuilder.Entity<Record>(entity =>
@@ -218,21 +216,21 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Records)
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-<<<<<<< HEAD:Ass_SWD/Models/MyStoreContext.cs
-                    .HasConstraintName("FK__Record__PatientI__4AB81AF0");
-=======
+
+                    .HasConstraintName("FK__Record__PatientI__4AB81AF0")
+
                     .HasConstraintName("FK__Record__PatientI__35BCFE0A");
->>>>>>> 530c47ec22469e0f421194d4574a3f0eff60453a:Ass_SWD/Model/MyStoreContext.cs
+
 
                 entity.HasOne(d => d.Service)
                     .WithMany(p => p.Records)
                     .HasForeignKey(d => d.ServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-<<<<<<< HEAD:Ass_SWD/Models/MyStoreContext.cs
-                    .HasConstraintName("FK__Record__ServiceI__4BAC3F29");
-=======
+
+                    .HasConstraintName("FK__Record__ServiceI__4BAC3F29")
+
                     .HasConstraintName("FK__Record__ServiceI__36B12243");
->>>>>>> 530c47ec22469e0f421194d4574a3f0eff60453a:Ass_SWD/Model/MyStoreContext.cs
+
             });
 
             modelBuilder.Entity<Service>(entity =>

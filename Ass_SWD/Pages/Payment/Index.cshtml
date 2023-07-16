@@ -1,0 +1,42 @@
+﻿@page
+@model Ass_SWD.Pages.Payment.IndexModel
+@{
+}
+@{
+    Layout = "_MainLayout";
+}
+<h1>List Payment</h1>
+
+<div>
+    <table style="margin-top:10px" class="table table-hover mb-0 table-bordered">
+        <thead>
+            <tr>
+                <td>PaymentID</td>
+                <td>InvoiceNumber</td>
+                <td>CategoryID</td>
+                <td>RequiredDate</td>
+                <td>PayedDate</td>
+                <td>Partner</td>
+                <td>DepartmentID</td>
+                <td>Amount</td>
+                <td>status</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Model.payments)
+            {
+                <tr>
+                    <td>@payment.PaymentId</td>
+                    <td>@payment.InvoiceNumber</td>
+                    <td>@payment.CategoryId</td>
+                    <td>@payment.RequiredDate?.ToString("dd/MM/yyyy")</td>
+                    <td>@payment.PayedDate?.ToString("dd/MM/yyyy")</td>
+                    <td>@payment.Partner</td>
+                    <td>@payment.DepartmentId</td>
+                    <td>@payment.Amount</td>
+                    <td>@payment.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -30,19 +30,24 @@ namespace Ass_SWD.Pages.Insurance
 
             using (var db = new MyStoreContext())
             {
-                if (db.Insurances.Any(x => x.PatientId == Insurance.PatientId && x.Number == Insurance.Number))
+                if (db.Insurances.Any(x => x.PatientId == Insurance.PatientId 
+                && x.Number == Insurance.Number && x.Type.Equals(Insurance.Type)))
                 {
-                    ViewData["notice"] = "Insurance already exist";
-                    ViewData["type"] = new SelectList(type);
+                    setNotice("Insurance already exist");
                     return Page();
                 }
-                ViewData["notice"] = "Insurance success";
-                ViewData["type"] = new SelectList(type);
+                setNotice("Insurance success");
                 db.Insurances.Add(Insurance);
                 db.SaveChanges();
-                Id = Insurance.PatientId;
                 return Page();
             }
+        }
+
+        private void setNotice(string notice)
+        {
+            ViewData["notice"] = notice;
+            ViewData["type"] = new SelectList(type);
+            Id = Insurance.PatientId;
         }
     }
 }

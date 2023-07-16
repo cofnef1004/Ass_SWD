@@ -1,0 +1,41 @@
+﻿@page
+@model Ass_SWD.Pages.UpdatePatientsModel
+@{
+}
+@{
+    Layout = "_MainLayout";
+}
+
+<h1>Update Patient</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.Patient.PatientId" />
+    <div class="form-group">
+        <label asp-for="@Model.Patient.FullName"></label>
+        <input asp-for="@Model.Patient.FullName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Patient.Gender"></label>
+        <select asp-for="@Model.Patient.Gender" class="form-control">
+            <option value="Male" selected>Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Patient.Dob"></label>
+        <input asp-for="@Model.Patient.Dob" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Patient.Address"></label>
+        <input asp-for="@Model.Patient.Address" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Patient.Phone"></label>
+        <input asp-for="@Model.Patient.Phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Patient.NumberId"></label>
+        <input asp-for="@Model.Patient.NumberId" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Ass_SWD.Models
+namespace Ass_SWD.DataAccess.Models
 {
     public partial class MyStoreContext : DbContext
     {
@@ -17,20 +17,22 @@ namespace Ass_SWD.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
-        public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Fee> Fees { get; set; } = null!;
         public virtual DbSet<Insurance> Insurances { get; set; } = null!;
         public virtual DbSet<Patient> Patients { get; set; } = null!;
         public virtual DbSet<Payment> Payments { get; set; } = null!;
         public virtual DbSet<Record> Records { get; set; } = null!;
         public virtual DbSet<Service> Services { get; set; } = null!;
+        public virtual DbSet<staff> staff { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server = LAPTOP-AS7TTRIH\\SQLEXPRESS; database = MyStore;uid=sa;pwd=123;TrustServerCertificate=true");
+                var conf = new ConfigurationBuilder()
+                  .SetBasePath(Directory.GetCurrentDirectory())
+                  .AddJsonFile("appsettings.json").Build();
+                optionsBuilder.UseSqlServer(conf.GetConnectionString("MyCnn"));
             }
         }
 
@@ -45,38 +47,6 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.CategoryName).HasMaxLength(20);
 
                 entity.Property(e => e.Description).HasMaxLength(100);
-            });
-
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.ToTable("Employee");
-
-                entity.HasIndex(e => e.UserName, "UQ__Employee__C9F28456166F020E")
-                    .IsUnique();
-
-                entity.Property(e => e.Address).HasMaxLength(100);
-
-                entity.Property(e => e.Dob)
-                    .HasColumnType("date")
-                    .HasColumnName("DOB");
-
-                entity.Property(e => e.Email).HasMaxLength(100);
-
-                entity.Property(e => e.FullName).HasMaxLength(50);
-
-                entity.Property(e => e.Gender).HasMaxLength(10);
-
-                entity.Property(e => e.NumberId)
-                    .HasMaxLength(15)
-                    .HasColumnName("NumberID");
-
-                entity.Property(e => e.Password).HasMaxLength(20);
-
-                entity.Property(e => e.Phone).HasMaxLength(12);
-
-                entity.Property(e => e.Role).HasMaxLength(40);
-
-                entity.Property(e => e.UserName).HasMaxLength(15);
             });
 
             modelBuilder.Entity<Fee>(entity =>
@@ -156,11 +126,15 @@ namespace Ass_SWD.Models
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.BillingInformation).HasMaxLength(100);
-
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
+                entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+
+                entity.Property(e => e.Partner).HasMaxLength(100);
+
                 entity.Property(e => e.PayedDate).HasColumnType("date");
+
+                entity.Property(e => e.RequiredDate).HasColumnType("date");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
@@ -223,6 +197,40 @@ namespace Ass_SWD.Models
                 entity.Property(e => e.Name).HasMaxLength(100);
 
                 entity.Property(e => e.Type).HasMaxLength(40);
+            });
+
+            modelBuilder.Entity<staff>(entity =>
+            {
+                entity.ToTable("Staff");
+
+                entity.HasIndex(e => e.UserName, "UQ__Staff__C9F28456CE3A5518")
+                    .IsUnique();
+
+                entity.Property(e => e.StaffId).HasColumnName("StaffID");
+
+                entity.Property(e => e.Address).HasMaxLength(100);
+
+                entity.Property(e => e.Dob)
+                    .HasColumnType("date")
+                    .HasColumnName("DOB");
+
+                entity.Property(e => e.Email).HasMaxLength(100);
+
+                entity.Property(e => e.FullName).HasMaxLength(50);
+
+                entity.Property(e => e.Gender).HasMaxLength(10);
+
+                entity.Property(e => e.NumberId)
+                    .HasMaxLength(15)
+                    .HasColumnName("NumberID");
+
+                entity.Property(e => e.Password).HasMaxLength(20);
+
+                entity.Property(e => e.Phone).HasMaxLength(12);
+
+                entity.Property(e => e.Role).HasMaxLength(40);
+
+                entity.Property(e => e.UserName).HasMaxLength(15);
             });
 
             OnModelCreatingPartial(modelBuilder);

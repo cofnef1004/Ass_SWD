@@ -18,9 +18,7 @@ namespace Ass_SWD.Pages.Insurance
             {
                 Insurance = db.Insurances.FirstOrDefault(i => i.InsuranceId == id);
             }
-            Id = Insurance.PatientId;
-            ViewData["notice"] = "";
-            ViewData["type"] = new SelectList(type);
+            setNotice("");
             return Page();
         }
 
@@ -29,13 +27,28 @@ namespace Ass_SWD.Pages.Insurance
             using (var db = new MyStoreContext())
             {
 
+
                 ViewData["notice"] = "Insurance update success";
                 ViewData["type"] = new SelectList(type);
+                if (db.Insurances.Any(x => x.PatientId == Insurance.PatientId
+               && x.Number == Insurance.Number && x.Type.Equals(Insurance.Type)))
+                {
+                    setNotice("Insurance already exist");
+                    return Page();
+                }
+                setNotice("Insurance update success");
+
                 db.Insurances.Update(Insurance);
                 db.SaveChanges();
-                Id = Insurance.PatientId;
                 return Page();
             }
+        }
+
+        private void setNotice(string notice)
+        {
+            ViewData["notice"] = notice;
+            ViewData["type"] = new SelectList(type);
+            Id = Insurance.PatientId;
         }
 
     }

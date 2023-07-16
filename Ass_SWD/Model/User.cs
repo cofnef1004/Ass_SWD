@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Ass_SWD.Models
 {
-    public partial class Employee
+    public partial class User
     {
-        public int EmployeeId { get; set; }
+        public int UserId { get; set; }
         public string UserName { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string Email { get; set; } = null!;

@@ -1,6 +1,12 @@
 ﻿USE [master]
 GO
 /****** Object:  Database [MyStore]    Script Date: 11-Jul-23 2:19:30 PM ******/
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'MyStore')
+BEGIN
+	ALTER DATABASE [MyStore] SET OFFLINE WITH ROLLBACK IMMEDIATE;
+	ALTER DATABASE [MyStore] SET ONLINE;
+	DROP DATABASE [MyStore];
+END
 CREATE DATABASE [MyStore]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -95,13 +101,13 @@ CREATE TABLE [dbo].[Category](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Employee]    Script Date: 11-Jul-23 2:19:30 PM ******/
+/****** Object:  Table [dbo].[User]    Script Date: 11-Jul-23 2:19:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Employee](
-	[EmployeeId] [int] IDENTITY(1,1) NOT NULL,
+CREATE TABLE [dbo].[User](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
 	[UserName] [nvarchar](15) NOT NULL,
 	[Password] [nvarchar](20) NOT NULL,
 	[Email] [nvarchar](100) NOT NULL,
@@ -112,9 +118,9 @@ CREATE TABLE [dbo].[Employee](
 	[Phone] [nvarchar](12) NULL,
 	[NumberID] [nvarchar](15) NOT NULL,
 	[Role] [nvarchar](40) NULL,
- CONSTRAINT [PK_emp] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED 
 (
-	[EmployeeId] ASC
+	[UserId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -242,21 +248,21 @@ INSERT [dbo].[Category] ([CategoryID], [CategoryName], [Description]) VALUES (5,
 GO
 SET IDENTITY_INSERT [dbo].[Category] OFF
 GO
-SET IDENTITY_INSERT [dbo].[Employee] ON 
+SET IDENTITY_INSERT [dbo].[User] ON 
 GO
-INSERT [dbo].[Employee] ([EmployeeId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (1, N'duy', N'123', N'john@example.com', N'John Smith', N'Male', CAST(N'1990-05-15' AS Date), N'123 Main St', N'123-456-7890', N'1234567890', N'Staff')
+INSERT [dbo].[User] ([UserId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (1, N'duy', N'123', N'john@example.com', N'John Smith', N'Male', CAST(N'1990-05-15' AS Date), N'123 Main St', N'123-456-7890', N'1234567890', N'Staff')
 GO
-INSERT [dbo].[Employee] ([EmployeeId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (2, N'johnsmith', N'password1', N'john@example.com', N'John Smith', N'Male', CAST(N'1990-05-15' AS Date), N'123 Main St', N'123-456-7890', N'1234567890', N'Admin')
+INSERT [dbo].[User] ([UserId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (2, N'johnsmith', N'password1', N'john@example.com', N'John Smith', N'Male', CAST(N'1990-05-15' AS Date), N'123 Main St', N'123-456-7890', N'1234567890', N'Admin')
 GO
-INSERT [dbo].[Employee] ([EmployeeId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (3, N'janedoe', N'password2', N'jane@example.com', N'Jane Doe', N'Female', CAST(N'1988-10-20' AS Date), N'456 Elm St', N'987-654-3210', N'0987654321', N'Staff')
+INSERT [dbo].[User] ([UserId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (3, N'janedoe', N'password2', N'jane@example.com', N'Jane Doe', N'Female', CAST(N'1988-10-20' AS Date), N'456 Elm St', N'987-654-3210', N'0987654321', N'Staff')
 GO
-INSERT [dbo].[Employee] ([EmployeeId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (4, N'mikesmith', N'password3', N'mike@example.com', N'Mike Smith', N'Male', CAST(N'1992-03-25' AS Date), N'789 Oak St', N'555-555-5555', N'9876543210', N'Staff')
+INSERT [dbo].[User] ([UserId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (4, N'mikesmith', N'password3', N'mike@example.com', N'Mike Smith', N'Male', CAST(N'1992-03-25' AS Date), N'789 Oak St', N'555-555-5555', N'9876543210', N'Staff')
 GO
-INSERT [dbo].[Employee] ([EmployeeId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (5, N'sarahjones', N'password4', N'sarah@example.com', N'Sarah Jones', N'Female', CAST(N'1995-07-08' AS Date), N'321 Pine St', N'111-222-3333', N'0123456789', N'Staff')
+INSERT [dbo].[User] ([UserId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (5, N'sarahjones', N'password4', N'sarah@example.com', N'Sarah Jones', N'Female', CAST(N'1995-07-08' AS Date), N'321 Pine St', N'111-222-3333', N'0123456789', N'Staff')
 GO
-INSERT [dbo].[Employee] ([EmployeeId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (6, N'markwilson', N'password5', N'mark@example.com', N'Mark Wilson', N'Male', CAST(N'1991-12-01' AS Date), N'567 Maple St', N'444-444-4444', N'5678901234', N'Staff')
+INSERT [dbo].[User] ([UserId], [UserName], [Password], [Email], [FullName], [Gender], [DOB], [Address], [Phone], [NumberID], [Role]) VALUES (6, N'markwilson', N'password5', N'mark@example.com', N'Mark Wilson', N'Male', CAST(N'1991-12-01' AS Date), N'567 Maple St', N'444-444-4444', N'5678901234', N'Staff')
 GO
-SET IDENTITY_INSERT [dbo].[Employee] OFF
+SET IDENTITY_INSERT [dbo].[User] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Fee] ON 
 GO
@@ -344,8 +350,8 @@ SET IDENTITY_INSERT [dbo].[Service] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__Employee__C9F28456166F020E]    Script Date: 11-Jul-23 2:19:30 PM ******/
-ALTER TABLE [dbo].[Employee] ADD UNIQUE NONCLUSTERED 
+/****** Object:  Index [UQ__User__C9F28456166F020E]    Script Date: 11-Jul-23 2:19:30 PM ******/
+ALTER TABLE [dbo].[User] ADD UNIQUE NONCLUSTERED 
 (
 	[UserName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -365,9 +371,9 @@ GO
 ALTER TABLE [dbo].[Record]  WITH CHECK ADD FOREIGN KEY([ServiceID])
 REFERENCES [dbo].[Service] ([ServiceID])
 GO
-ALTER TABLE [dbo].[Employee]  WITH CHECK ADD CHECK  (([Gender]='Female' OR [Gender]='Male'))
+ALTER TABLE [dbo].[User]  WITH CHECK ADD CHECK  (([Gender]='Female' OR [Gender]='Male'))
 GO
-ALTER TABLE [dbo].[Employee]  WITH CHECK ADD CHECK  (([Role]='Staff' OR [Role]='Admin'))
+ALTER TABLE [dbo].[User]  WITH CHECK ADD CHECK  (([Role]='Staff' OR [Role]='Admin'))
 GO
 ALTER TABLE [dbo].[Fee]  WITH CHECK ADD CHECK  (([Method]='Other' OR [Method]='Health Insurance' OR [Method]='Credit Card' OR [Method]='Cash'))
 GO

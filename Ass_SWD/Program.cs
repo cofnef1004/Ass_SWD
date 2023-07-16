@@ -11,6 +11,7 @@ builder.Services.AddScoped<MyStoreContext>();
 
 builder.Services.AddSignalR();
 
+
 // session
 builder.Services.AddSession(options =>
 {
@@ -33,5 +34,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapControllers();
 
 app.Run();

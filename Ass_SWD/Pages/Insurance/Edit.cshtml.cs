@@ -14,7 +14,7 @@ namespace Ass_SWD.Pages.Insurance
         public int Id;
         public IActionResult OnGet(int id)
         {
-            using(var db = new MyStoreContext())
+            using (var db = new MyStoreContext())
             {
                 Insurance = db.Insurances.FirstOrDefault(i => i.InsuranceId == id);
             }
@@ -28,7 +28,7 @@ namespace Ass_SWD.Pages.Insurance
         {
             using (var db = new MyStoreContext())
             {
-                
+
                 ViewData["notice"] = "Insurance update success";
                 ViewData["type"] = new SelectList(type);
                 db.Insurances.Update(Insurance);

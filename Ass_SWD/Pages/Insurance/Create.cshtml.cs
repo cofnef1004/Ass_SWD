@@ -15,7 +15,7 @@ namespace Ass_SWD.Pages.Insurance
         public Models.Insurance Insurance { get; set; } = default!;
         private List<String> type = new List<String> { "Health", "Treatment", "Medical" };
 
-        public int Id ;
+        public int Id;
         public IActionResult OnGet(int id)
         {
             Id = id;
@@ -27,7 +27,7 @@ namespace Ass_SWD.Pages.Insurance
         public async Task<IActionResult> OnPostAsync()
         {
 
-            
+
             using (var db = new MyStoreContext())
             {
                 if (db.Insurances.Any(x => x.PatientId == Insurance.PatientId && x.Number == Insurance.Number))

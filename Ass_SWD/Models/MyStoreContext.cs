@@ -29,12 +29,11 @@ namespace Ass_SWD.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var conf = new ConfigurationBuilder()
-                  .SetBasePath(Directory.GetCurrentDirectory())
-                  .AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(conf.GetConnectionString("MyCnn"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server = LAPTOP-AS7TTRIH\\SQLEXPRESS; database = MyStore;uid=sa;pwd=123;TrustServerCertificate=true");
             }
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>(entity =>
@@ -52,10 +51,8 @@ namespace Ass_SWD.Models
             {
                 entity.ToTable("Employee");
 
-                entity.HasIndex(e => e.UserName, "UQ__Employee__C9F2845664BB23B7")
+                entity.HasIndex(e => e.UserName, "UQ__Employee__C9F28456166F020E")
                     .IsUnique();
-
-                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
                 entity.Property(e => e.Address).HasMaxLength(100);
 
@@ -102,7 +99,7 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Fees)
                     .HasForeignKey(d => d.RecordId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Fee__RecordID__398D8EEE");
+                    .HasConstraintName("FK__Fee__RecordID__4CA06362");
             });
 
             modelBuilder.Entity<Insurance>(entity =>
@@ -125,7 +122,7 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Insurances)
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Insurance__Patie__3A81B327");
+                    .HasConstraintName("FK__Insurance__Patie__4D94879B");
             });
 
             modelBuilder.Entity<Patient>(entity =>
@@ -159,15 +156,11 @@ namespace Ass_SWD.Models
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
 
+                entity.Property(e => e.BillingInformation).HasMaxLength(100);
+
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
-
-                entity.Property(e => e.Partner).HasMaxLength(100);
-
                 entity.Property(e => e.PayedDate).HasColumnType("date");
-
-                entity.Property(e => e.RequiredDate).HasColumnType("date");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 
@@ -175,7 +168,7 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Payment__Categor__3B75D760");
+                    .HasConstraintName("FK__Payment__Categor__4E88ABD4");
             });
 
             modelBuilder.Entity<Record>(entity =>
@@ -210,13 +203,13 @@ namespace Ass_SWD.Models
                     .WithMany(p => p.Records)
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Record__PatientI__37A5467C");
+                    .HasConstraintName("FK__Record__PatientI__4AB81AF0");
 
                 entity.HasOne(d => d.Service)
                     .WithMany(p => p.Records)
                     .HasForeignKey(d => d.ServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Record__ServiceI__38996AB5");
+                    .HasConstraintName("FK__Record__ServiceI__4BAC3F29");
             });
 
             modelBuilder.Entity<Service>(entity =>

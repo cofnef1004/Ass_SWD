@@ -1,11 +1,11 @@
-using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.DataAccess.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-
 namespace Ass_SWD.Pages
 {
+    using Ass_SWD.Business.Interface;
+    using Ass_SWD.Bussiness.Interface;
+    using Ass_SWD.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     public class PatientsModel : PageModel
     {
         IPatientRepository _patientRepository;

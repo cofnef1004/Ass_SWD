@@ -1,12 +1,11 @@
-﻿using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.DataAccess.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-
-namespace Ass_SWD.Pages
+﻿namespace Ass_SWD.Pages
 {
+    using Ass_SWD.Business.Interface;
+    using Ass_SWD.Bussiness.Interface;
+    using Ass_SWD.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     public class FeeModel : PageModel
     {
         IRecordRepository _recordRepository;
@@ -22,7 +21,7 @@ namespace Ass_SWD.Pages
         public Record record { get; set; }
 
         [BindProperty]
-        public List<Fee> Fees { get; set; }
+        public List<Models.Fee> Fees { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

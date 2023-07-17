@@ -1,11 +1,10 @@
-using Ass_SWD.DataAccess.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using System;
-
 namespace Ass_SWD.Pages
 {
+    using Ass_SWD.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.EntityFrameworkCore;
+
     public class UpdatePatientsModel : PageModel
     {
         private readonly MyStoreContext _context;
@@ -37,7 +36,7 @@ namespace Ass_SWD.Pages
                 return Page();
             }
 
-            _context.Attach(Patient).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Attach(Patient).State = EntityState.Modified;
 
             try
             {

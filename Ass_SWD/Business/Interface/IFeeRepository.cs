@@ -6,8 +6,9 @@
 	{
         Task<List<Fee>> GetFeesByRecordIdAsync(int id);
         Task<Fee>       GetFeeByRecordIdAsync(int id);
-        List<Fee>          GetAllFees();
+        List<Fee>       GetAllFees();
         void            AddFee(Fee f);
         void            UpdateFee(Fee f);
+        Fee             GetFeeById(int id);
 	}
 }

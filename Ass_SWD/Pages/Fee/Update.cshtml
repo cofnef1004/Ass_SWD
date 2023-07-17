@@ -1,0 +1,29 @@
+﻿@page
+@model Ass_SWD.Pages.Fee.Update
+
+@{
+    Layout = "_MainLayout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <form asp-page="/Fee/Update" asp-page-handler="updateFee">
+            <input type="hidden" name="feeId" value="@Model.FeeId"/>
+            <br/>Amount:<input type="number" name="amount"/>
+            <br/>Method: <select name="method">
+                <option value="Cash">Cash</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Health Insurance">Health Insurance</option>
+                <option value="Other">Other</option>
+            </select>
+            <br/> <input type="submit" value="Add"/>
+        </form>
+</div>
+</body>
+</html>

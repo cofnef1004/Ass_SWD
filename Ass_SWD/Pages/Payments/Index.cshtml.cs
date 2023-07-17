@@ -1,33 +1,25 @@
+using Ass_SWD.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Ass_SWD.Models;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Ass_SWD.DataAccess.Models;
 
-using System.Data;
-using ClosedXML.Excel;
-
-namespace Ass_SWD.Pages.Payments
+namespace Ass_SWD.Pages.Payment
 {
+
     public class IndexModel : PageModel
     {
-
-        public List<Payment> listPayment { get; set; }
-        MyStoreContext _storeContext;
-
-        public IndexModel(MyStoreContext storeContext)
-        {
-
-            _storeContext = storeContext;
-        }
+        public readonly DataAccess.Models.MyStoreContext _context = new DataAccess.Models.MyStoreContext();
+        public List<DataAccess.Models.Payment> payments = new List<DataAccess.Models.Payment>();
 
         public void OnGet()
         {
-            listPayment = _storeContext.Payments.ToList();
+            payments = _context.Payments.ToList();
         }
-
+    }
+}
 
         //public IActionResult OnPostExport()
         //{
@@ -83,7 +75,4 @@ namespace Ass_SWD.Pages.Payments
         //    }
         //}
 
-        
-
-    }
-}
+       

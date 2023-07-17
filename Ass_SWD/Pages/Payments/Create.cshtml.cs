@@ -13,10 +13,9 @@ namespace Ass_SWD.Pages.Payments
         public List<Category> paymentsGroupByCateID { get; set; }
 
         [BindProperty]
-        public Payment PaymentEntity { get; set; } = default!;
+        public DataAccess.Models.Payment PaymentEntity { get; set; } = default!;
 
-       
-        
+    
         public CreateModel(IPaymentService paymentService, MyStoreContext context )
         {
             _paymentService = paymentService;

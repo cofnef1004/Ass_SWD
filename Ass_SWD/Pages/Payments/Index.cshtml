@@ -1,5 +1,5 @@
 ﻿@page
-@model Ass_SWD.Pages.Payments.IndexModel
+@model Ass_SWD.Pages.Payment.IndexModel
 @using Ass_SWD.Models
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -19,30 +19,46 @@
         Payment
     </h2>
 
+    <form method="get">
+        <table>
+            <tr>
+                <td width="100">PaymentId</td>
+                <td><input name="paymentId" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input style="margin-top:7px" type="submit" value="Search"</td>
+            </tr>
+        </table>
+    </form>
+
     <table class="table table-bordered" id="tblPayment">
         <thead>
-            <tr>
-                <th scope="col">Payment ID</th>
-                <th scope="col">Invoice Number</th>
-                <th scope="col">Billing Information</th>
+             <tr>
+                <th scope="col">PaymentID</th>
+                <th scope="col">InvoiceNumber</th>
+                <th scope="col">CategoryID</th>
+                <th scope="col">RequiredDate</th>
+                <th scope="col">PayedDate</th>
+                <th scope="col">Partner</th>
+                <th scope="col">DepartmentID</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Payed Date</th>
-                <th scope="col">Status</th>
+                <th scope="col">status</th>
             </tr>
         </thead>
-        <tbody>
-
-            
-       
-            @foreach (Payment p in Model.listPayment)
+        <tbody>          
+            @foreach (var payment in Model.payments)
             {
                 <tr>
-                    <td>@p.PaymentId</td>
-                    <td>@p.InvoiceNumber</td>
-                    <td>@p.BillingInformation</td>
-                    <td>@p.Amount</td>
-                    <td>@p.PayedDate</td>
-                    @if (p.Status == true)
+                    <td>@payment.PaymentId</td>
+                    <td>@payment.InvoiceNumber</td>
+                    <td>@payment.CategoryId</td>
+                    <td>@payment.RequiredDate?.ToString("dd/MM/yyyy")</td>
+                    <td>@payment.PayedDate?.ToString("dd/MM/yyyy")</td>
+                    <td>@payment.Partner</td>
+                    <td>@payment.DepartmentId</td>
+                    <td>@payment.Amount</td>
+                    @if (payment.Status == true)
                     {
                         <td>Done</td>
                     }

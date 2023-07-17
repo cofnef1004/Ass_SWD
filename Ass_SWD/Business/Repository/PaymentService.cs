@@ -17,5 +17,10 @@ namespace Ass_SWD.Business.Repository
             _storeContext.Payments.Add(payment);
             _storeContext.SaveChanges();
         }
+
+        public void AddPayment(DataAccess.Models.Payment paymentEntity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

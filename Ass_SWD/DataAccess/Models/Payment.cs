@@ -16,5 +16,6 @@ namespace Ass_SWD.DataAccess.Models
         public bool? Status { get; set; }
 
         public virtual Category Category { get; set; } = null!;
+        public string BillingInformation { get; internal set; }
     }
 }

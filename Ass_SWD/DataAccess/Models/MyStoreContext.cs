@@ -32,7 +32,7 @@ namespace Ass_SWD.DataAccess.Models
                 var conf = new ConfigurationBuilder()
                   .SetBasePath(Directory.GetCurrentDirectory())
                   .AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(conf.GetConnectionString("MyCnn"));
+                optionsBuilder.UseSqlServer(conf.GetConnectionString("MyStore"));
             }
         }
 

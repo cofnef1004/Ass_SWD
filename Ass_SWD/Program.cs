@@ -1,4 +1,5 @@
 using Ass_SWD.Models;
+using Ass_SWD.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MyStoreContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
 builder.Services.AddScoped<MyStoreContext>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 
 builder.Services.AddSignalR();
 

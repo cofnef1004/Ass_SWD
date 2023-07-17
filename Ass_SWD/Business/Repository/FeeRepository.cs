@@ -32,6 +32,11 @@
             this.context.Fees.Update(f);
             this.context.SaveChanges();
         }
+        public Fee GetFeeById(int id)
+        {
+            var fee = this.context.Fees.FirstOrDefault(f => f.FeeId == id);
+            return fee;
+        }
         public async Task<List<Fee>> GetFeesByRecordIdAsync(int id)
         {
             return await context.Fees.Where(o => o.RecordId == id).ToListAsync();

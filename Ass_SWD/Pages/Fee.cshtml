@@ -28,6 +28,7 @@
                 <td>@fee.Record.RecordDate.ToString("dd/MM/yyyy")</td>
                 <td>@fee.Amount.ToString("C")</td>
                 <td>@Html.DropDownListFor(model => fee.Method, new SelectList(new[] { "Cash", "Credit Card", "Health Insurance", "Other" }))</td>
+                <td><a asp-page="./Fee/Update" asp-route-id="@fee.FeeId" class="btn btn-success">Update Fee</a></td>
             </tr>
         }
     </tbody>

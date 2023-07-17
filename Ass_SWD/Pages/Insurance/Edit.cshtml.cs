@@ -30,7 +30,7 @@ namespace Ass_SWD.Pages.Insurance
 
                 ViewData["notice"] = "Insurance update success";
                 ViewData["type"] = new SelectList(type);
-                if (db.Insurances.Any(x => x.PatientId == Insurance.PatientId
+                if (db.Insurances.Any(x => x.PatientId != Insurance.PatientId
                && x.Number == Insurance.Number && x.Type.Equals(Insurance.Type)))
                 {
                     setNotice("Insurance already exist");

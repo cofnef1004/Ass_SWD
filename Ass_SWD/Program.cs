@@ -3,6 +3,7 @@ using Ass_SWD.Business.Repository;
 using Ass_SWD.Bussiness.Interface;
 using Ass_SWD.Bussiness.Repository;
 using Ass_SWD.Models;
+using Ass_SWD.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,8 +27,13 @@ builder.Services.AddTransient<IPaymentService, PaymentService>().AddDbContext<My
 builder.Services.AddTransient<IServiceRepository, ServiceRepository>().AddDbContext<MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("MyCnn"));
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MyStoreContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
 builder.Services.AddScoped<MyStoreContext>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 
 builder.Services.AddSignalR();
 

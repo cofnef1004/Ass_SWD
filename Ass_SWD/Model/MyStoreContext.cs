@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Ass_SWD.Models
+namespace Ass_SWD.Model
 {
     public partial class MyStoreContext : DbContext
     {

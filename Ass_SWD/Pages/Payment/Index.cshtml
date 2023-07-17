@@ -9,8 +9,8 @@
 <form method="get">
     <table>
         <tr>
-            <td width="100">Partner</td>
-            <td><input name="partner" /></td>
+            <td width="100">BillingInformation</td>
+            <td><input name="billingInformation" /></td>
         </tr>
         <tr>
             <td></td>
@@ -27,11 +27,9 @@
             <tr>
                 <th scope="col">PaymentID</th>
                 <th scope="col">InvoiceNumber</th>
-                <th scope="col">CategoryID</th>
-                <th scope="col">RequiredDate</th>
+                <th scope="col">CategoryID</th>           
                 <th scope="col">PayedDate</th>
-                <th scope="col">Partner</th>
-                <th scope="col">DepartmentID</th>
+                <th scope="col">BillingInformation</th>
                 <th scope="col">Amount</th>
                 <th scope="col">status</th>
             </tr>
@@ -42,11 +40,9 @@
                 <tr>
                     <td>@payment.PaymentId</td>
                     <td>@payment.InvoiceNumber</td>
-                    <td>@payment.CategoryId</td>
-                    <td>@payment.RequiredDate?.ToString("dd/MM/yyyy")</td>
+                    <td>@payment.CategoryId</td>               
                     <td>@payment.PayedDate?.ToString("dd/MM/yyyy")</td>
-                    <td>@payment.Partner</td>
-                    <td>@payment.DepartmentId</td>
+                    <td>@payment.BillingInformation</td>    
                     <td>@payment.Amount</td>
                     @if (payment.Status == true)
                     {

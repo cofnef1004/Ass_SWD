@@ -1,4 +1,4 @@
-using Ass_SWD.Models;
+using Ass_SWD.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,7 +12,7 @@ namespace Ass_SWD.Pages.Insurance
     public class CreateModel : PageModel
     {
         [BindProperty]
-        public Models.Insurance Insurance { get; set; } = default!;
+        public Model.Insurance Insurance { get; set; } = default!;
         private List<String> type = new List<String> { "Health", "Treatment", "Medical" };
 
         public int Id;

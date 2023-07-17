@@ -1,4 +1,4 @@
-using Ass_SWD.Models;
+using Ass_SWD.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,18 +11,18 @@ namespace Ass_SWD.Pages.Payment
    
     public class IndexModel : PageModel
     {
-        public readonly DataAccess.Models.MyStoreContext _context = new DataAccess.Models.MyStoreContext();
-        public List<DataAccess.Models.Payment> payments = new List<DataAccess.Models.Payment>();
+        public readonly Model.MyStoreContext _context = new Model.MyStoreContext();
+        public List<Model.Payment> payments = new List<Model.Payment>();
         
-        public void OnGet(string partner)
+        public void OnGet(string billingInformation)
         {
-            if (string.IsNullOrEmpty(partner))
+            if (string.IsNullOrEmpty(billingInformation))
             {
                 payments = _context.Payments.ToList();
             }
             else
             {             
-                payments = _context.Payments.Where(x => x.Partner.Contains(partner)).ToList();
+                payments = _context.Payments.Where(x => x.BillingInformation.Contains(billingInformation)).ToList();
             }
         }
     }

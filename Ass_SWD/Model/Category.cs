@@ -1,7 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
-namespace Ass_SWD.Models
+namespace Ass_SWD.Model
 {
     public partial class Category
     {

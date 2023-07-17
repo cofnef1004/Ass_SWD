@@ -14,9 +14,16 @@ namespace Ass_SWD.Pages.Payment
         public readonly DataAccess.Models.MyStoreContext _context = new DataAccess.Models.MyStoreContext();
         public List<DataAccess.Models.Payment> payments = new List<DataAccess.Models.Payment>();
         
-        public void OnGet()
+        public void OnGet(string partner)
         {
-            payments = _context.Payments.ToList();
+            if (string.IsNullOrEmpty(partner))
+            {
+                payments = _context.Payments.ToList();
+            }
+            else
+            {             
+                payments = _context.Payments.Where(x => x.Partner.Contains(partner)).ToList();
+            }
         }
     }
 }

@@ -5,21 +5,35 @@
 @{
     Layout = "_MainLayout";
 }
+
+<form method="get">
+    <table>
+        <tr>
+            <td width="100">Partner</td>
+            <td><input name="partner" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input style="margin-top:7px" type="submit" value="Search"</td>
+        </tr>
+    </table>
+</form>
+
 <h1>List Payment</h1>
 
 <div>
     <table style="margin-top:10px" class="table table-hover mb-0 table-bordered">
         <thead>
             <tr>
-                <td>PaymentID</td>
-                <td>InvoiceNumber</td>
-                <td>CategoryID</td>
-                <td>RequiredDate</td>
-                <td>PayedDate</td>
-                <td>Partner</td>
-                <td>DepartmentID</td>
-                <td>Amount</td>
-                <td>status</td>
+                <th scope="col">PaymentID</th>
+                <th scope="col">InvoiceNumber</th>
+                <th scope="col">CategoryID</th>
+                <th scope="col">RequiredDate</th>
+                <th scope="col">PayedDate</th>
+                <th scope="col">Partner</th>
+                <th scope="col">DepartmentID</th>
+                <th scope="col">Amount</th>
+                <th scope="col">status</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +48,14 @@
                     <td>@payment.Partner</td>
                     <td>@payment.DepartmentId</td>
                     <td>@payment.Amount</td>
-                    <td>@payment.Status</td>
+                    @if (payment.Status == true)
+                    {
+                        <td>Done</td>
+                    }
+                    else
+                    {
+                        <td>Processing</td>
+                    }
                 </tr>
             }
         </tbody>

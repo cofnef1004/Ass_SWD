@@ -26,13 +26,18 @@ namespace Ass_SWD.Pages.Insurance
         {
             using (var db = new MyStoreContext())
             {
-                if (db.Insurances.Any(x => x.PatientId == Insurance.PatientId
+
+
+                ViewData["notice"] = "Insurance update success";
+                ViewData["type"] = new SelectList(type);
+                if (db.Insurances.Any(x => x.PatientId != Insurance.PatientId
                && x.Number == Insurance.Number && x.Type.Equals(Insurance.Type)))
                 {
                     setNotice("Insurance already exist");
                     return Page();
                 }
                 setNotice("Insurance update success");
+
                 db.Insurances.Update(Insurance);
                 db.SaveChanges();
                 return Page();

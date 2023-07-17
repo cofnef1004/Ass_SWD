@@ -1,0 +1,37 @@
+﻿@page
+@model Ass_SWD.Pages.FeeModel
+@{
+    ViewData["Title"] = "Fee";
+}
+
+@{
+    Layout = "_MainLayout";
+}
+
+
+<table class="table table-hover mb-0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Method</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fee in Model.Fees)
+        {
+            <tr>
+                <td>@fee.FeeId</td>
+                <td>@fee.RecordId</td>
+                <td>@fee.Record.RecordDate.ToString("dd/MM/yyyy")</td>
+                <td>@fee.Amount.ToString("C")</td>
+                <td>@Html.DropDownListFor(model => fee.Method, new SelectList(new[] { "Cash", "Credit Card", "Health Insurance", "Other" }))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="./Patients" class="btn btn-secondary">Back to Patients</a>
+

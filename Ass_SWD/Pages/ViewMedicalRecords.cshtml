@@ -1,0 +1,109 @@
+﻿@page
+@model Ass_SWD.Pages.ViewMedicalRecordsModel
+@{
+    ViewData["Title"] = "View Medical Records";
+}
+@{
+    Layout = "_MainLayout";
+}
+
+<h1>Medical Records for @Model.Patient.FullName - ( @Model.Patient.Dob.ToString("dd/MM/yyyy") )</h1>
+
+<table class="table table-hover mb-0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Diagnosis</th>
+            <th>Prescription</th>
+            <th>Test Result</th>
+            <th>Imaging Result</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var record in Model.MedicalRecords)
+        {
+            <tr>
+                <td>@record.RecordId</td>
+                <td>@record.Service.Name</td>
+                <td>@record.RecordDate.ToString("dd/MM/yyyy")</td>
+                <td>@record.Diagnosis</td>
+                <td>@record.Prescription</td>
+                <td>@record.TestResult</td>
+                <td>@record.ImagingResult</td>
+                <td>
+                    <a asp-page="./Fee" asp-route-id="@record.RecordId" class="btn btn-success">View Fee</a>
+                </td>
+                <td><a asp-page="./Fee/Add" asp-route-id="@record.RecordId" class="btn btn-success">Add Fee</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<hr />
+
+<h2>Add Medical Record</h2>
+
+<form method="post" asp-page-handler="AddRecord">
+    <input type="hidden" asp-for="@Model.Patient.PatientId" />
+    <div>
+        <label asp-for="@Model.MedicalRecord.ServiceId"></label>
+        <select asp-for="@Model.MedicalRecord.ServiceId" asp-items="@Model.Services"></select>
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.RecordDate"></label>
+        <input asp-for="@Model.MedicalRecord.RecordDate" format="dd/MM/yyyy" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.Diagnosis"></label>
+        <input asp-for="@Model.MedicalRecord.Diagnosis" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.Prescription"></label>
+        <input asp-for="@Model.MedicalRecord.Prescription" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.TestResult"></label>
+        <input asp-for="@Model.MedicalRecord.TestResult" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.ImagingResult"></label>
+        <input asp-for="@Model.MedicalRecord.ImagingResult" />
+    </div>
+    <button type="submit">Add Record</button>
+</form>
+
+<hr />
+
+<h2>Edit Medical Record</h2>
+
+<form method="post" asp-page-handler="UpdateRecord">
+    <input type="hidden" asp-for="@Model.MedicalRecord.RecordId" />
+    <div>
+        <label asp-for="@Model.MedicalRecord.ServiceId"></label>
+        <select asp-for="@Model.MedicalRecord.ServiceId" asp-items="@Model.Services"></select>
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.RecordDate"></label>
+        <input asp-for="@Model.MedicalRecord.RecordDate" format="dd/MM/yyyy" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.Diagnosis"></label>
+        <input asp-for="@Model.MedicalRecord.Diagnosis" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.Prescription"></label>
+        <input asp-for="@Model.MedicalRecord.Prescription" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.TestResult"></label>
+        <input asp-for="@Model.MedicalRecord.TestResult" />
+    </div>
+    <div>
+        <label asp-for="@Model.MedicalRecord.ImagingResult"></label>
+        <input asp-for="@Model.MedicalRecord.ImagingResult" />
+    </div>
+    <button type="submit">Update Record</button>
+</form>*@

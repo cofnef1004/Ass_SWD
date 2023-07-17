@@ -1,8 +1,8 @@
-﻿using Ass_SWD.Model;
+﻿using Ass_SWD.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Ass_SWD.Model
+namespace Ass_SWD.Models
 {
     public partial class Payment
     {

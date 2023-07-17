@@ -1,5 +1,5 @@
 using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.Model;
+using Ass_SWD.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;

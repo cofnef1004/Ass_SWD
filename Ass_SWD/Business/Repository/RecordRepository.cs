@@ -1,5 +1,5 @@
 ﻿using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.DataAccess.Models;
+using Ass_SWD.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ass_SWD.Bussiness.Repository

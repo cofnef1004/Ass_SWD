@@ -1,4 +1,4 @@
-﻿using Ass_SWD.DataAccess.Models;
+﻿using Ass_SWD.Models;
 
 namespace Ass_SWD.Bussiness.Interface
 {

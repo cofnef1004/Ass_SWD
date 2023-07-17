@@ -1,10 +1,10 @@
-﻿using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.DataAccess.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace Ass_SWD.Bussiness.Repository
+﻿namespace Ass_SWD.Bussiness.Repository
 {
-	public class RecordRepository : IRecordRepository
+    using Ass_SWD.Bussiness.Interface;
+    using Ass_SWD.Models;
+    using Microsoft.EntityFrameworkCore;
+
+    public class RecordRepository : IRecordRepository
 	{
 		MyStoreContext context;
 

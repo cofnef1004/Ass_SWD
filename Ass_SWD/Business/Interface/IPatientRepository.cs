@@ -1,7 +1,7 @@
-﻿using Ass_SWD.DataAccess.Models;
-
-namespace Ass_SWD.Bussiness.Interface
+﻿namespace Ass_SWD.Business.Interface
 {
+    using Ass_SWD.Models;
+
     public interface IPatientRepository
     {
 		List<Patient> GetPatients();

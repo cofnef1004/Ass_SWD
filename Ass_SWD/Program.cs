@@ -1,31 +1,33 @@
-using Ass_SWD.Models;
-using Microsoft.EntityFrameworkCore;
-using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.Bussiness.Repository;
-using Ass_SWD.DataAccess.Models;
 using Ass_SWD.Business.Interface;
 using Ass_SWD.Business.Repository;
+using Ass_SWD.Bussiness.Interface;
+using Ass_SWD.Bussiness.Repository;
+using Ass_SWD.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddTransient<IPatientRepository, PatientRepository>().AddDbContext<Ass_SWD.DataAccess.Models.MyStoreContext>(opt =>
+builder.Services.AddTransient<IPatientRepository, PatientRepository>().AddDbContext<MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("MyCnn"));
 
-builder.Services.AddTransient<IRecordRepository, RecordRepository>().AddDbContext<Ass_SWD.DataAccess.Models.MyStoreContext>(opt =>
-    builder.Configuration.GetConnectionString("MyCnn"));
-
-
-builder.Services.AddTransient<IFeeRepository, FeeRepository>().AddDbContext<Ass_SWD.DataAccess.Models.MyStoreContext>(opt =>
+builder.Services.AddTransient<IRecordRepository, RecordRepository>().AddDbContext<MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("MyCnn"));
 
 
-builder.Services.AddTransient<IPaymentService, PaymentService>().AddDbContext<Ass_SWD.DataAccess.Models.MyStoreContext>(opt =>
+builder.Services.AddTransient<IFeeRepository, FeeRepository>().AddDbContext<MyStoreContext>(opt =>
     builder.Configuration.GetConnectionString("MyCnn"));
 
-builder.Services.AddDbContext<Ass_SWD.Models.MyStoreContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
-builder.Services.AddScoped<Ass_SWD.Models.MyStoreContext>();
+
+builder.Services.AddTransient<IPaymentService, PaymentService>().AddDbContext<MyStoreContext>(opt =>
+    builder.Configuration.GetConnectionString("MyCnn"));
+
+builder.Services.AddTransient<IServiceRepository, ServiceRepository>().AddDbContext<MyStoreContext>(opt =>
+    builder.Configuration.GetConnectionString("MyCnn"));
+
+builder.Services.AddDbContext<MyStoreContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
+builder.Services.AddScoped<MyStoreContext>();
 
 builder.Services.AddSignalR();
 

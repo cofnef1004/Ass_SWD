@@ -1,9 +1,9 @@
-﻿using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.DataAccess.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace Ass_SWD.Bussiness.Repository
+﻿namespace Ass_SWD.Bussiness.Repository
 {
+    using Ass_SWD.Business.Interface;
+    using Ass_SWD.Models;
+    using Microsoft.EntityFrameworkCore;
+
     public class FeeRepository : IFeeRepository
     {
         MyStoreContext context;
@@ -17,6 +17,20 @@ namespace Ass_SWD.Bussiness.Repository
         {
             return await context.Fees.FindAsync(id);
             
+        }
+        public List<Fee> GetAllFees()
+        {
+            return this.context.Fees.ToList();
+        }
+        public void AddFee(Fee f)
+        {
+            this.context.Fees.Add(f);
+            this.context.SaveChanges();
+        }
+        public void UpdateFee(Fee f)
+        {
+            this.context.Fees.Update(f);
+            this.context.SaveChanges();
         }
         public async Task<List<Fee>> GetFeesByRecordIdAsync(int id)
         {

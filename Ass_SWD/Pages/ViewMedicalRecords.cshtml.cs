@@ -1,24 +1,27 @@
-using Ass_SWD.Bussiness.Interface;
-using Ass_SWD.DataAccess.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-
 namespace Ass_SWD.Pages
 {
+    using Ass_SWD.Business.Interface;
+    using Ass_SWD.Bussiness.Interface;
+    using Ass_SWD.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class ViewMedicalRecordsModel : PageModel
     {
         private readonly IRecordRepository _recordRepository;
+        private readonly IFeeRepository    feeRepository;
 
-        public ViewMedicalRecordsModel(IRecordRepository recordRepository)
+        public ViewMedicalRecordsModel(IRecordRepository recordRepository, IFeeRepository feeRepository)
         {
-            _recordRepository = recordRepository;
+            _recordRepository  = recordRepository;
+            this.feeRepository = feeRepository;
         }
 
         public List<Record> MedicalRecords { get; set; }
 
-        public Patient Patient { get; set; }
+        public Patient          Patient { get; set; }
+        public List<Models.Fee> Fees    { get; set; }
 
         [BindProperty]
         public Record MedicalRecord { get; set; }

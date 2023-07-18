@@ -1,4 +1,4 @@
-﻿using Ass_SWD.Business.Interface;
+﻿using Ass_SWD.Services;
 using Ass_SWD.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,7 +10,7 @@ namespace Ass_SWD.Pages.Payments
     {
         IPaymentService _paymentService;
         MyStoreContext _storeContext;
-        public List<Category> paymentsGroupByCateID { get; set; }
+        public List<Models.Category> paymentsGroupByCateID { get; set; }
 
         [BindProperty]
         public Payment PaymentEntity { get; set; } = default!;

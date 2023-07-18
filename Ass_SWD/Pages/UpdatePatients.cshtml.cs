@@ -1,9 +1,13 @@
+
+using Ass_SWD.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 namespace Ass_SWD.Pages
 {
-    using Ass_SWD.Models;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.EntityFrameworkCore;
+    
 
     public class UpdatePatientsModel : PageModel
     {

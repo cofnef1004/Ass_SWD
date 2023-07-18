@@ -1,0 +1,82 @@
+﻿@page
+@model Ass_SWD.Pages.PaymentList.IndexModel
+@{
+}
+@{
+    Layout = "_MainLayout";
+}
+
+<form method="get">
+    <table>
+        <tr>
+            <td width="100">BillingInformation</td>
+            <td><input name="billingInformation" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input style="margin-top:7px" type="submit" value="Search"</td>
+        </tr>
+    </table>
+</form>
+
+<h1>List Payment</h1>
+
+<div>
+    <table style="margin-top:10px" class="table table-hover mb-0 table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">PaymentID</th>
+                <th scope="col">InvoiceNumber</th>
+                <th scope="col">CategoryID</th>           
+                <th scope="col">PayedDate</th>
+                <th scope="col">BillingInformation</th>
+                <th scope="col">Amount</th>
+                <th scope="col">status</th>
+            </tr>
+        </thead>
+       @if(Model.payments.Count > 0){
+            <tbody>
+                @foreach (var payment in Model.payments)
+                {
+                    <tr>
+                        <td>@payment.PaymentId</td>
+                        <td>@payment.InvoiceNumber</td>
+                        <td>@payment.CategoryId</td>
+                        <td>@payment.PayedDate?.ToString("dd/MM/yyyy")</td>
+                        <td>@payment.BillingInformation</td>
+                        <td>@payment.Amount</td>
+                        @if (payment.Status == true)
+                        {
+                            <td>Done</td>
+                        }
+                        else
+                        {
+                            <td>Processing</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+       }else{
+           <div>No information</div>
+       }
+    </table>
+
+    <a asp-page="/Payments/Create">
+        <input type="submit" class="btn btn-primary" value="Add new payment" />
+    </a>
+
+    @if(Model.payments.Count > 0){
+        <button onclick="tableToExcel()" class="btn btn-primary">Export</button>
+    }else{
+        <button onclick="showMessage()" class="btn btn-primary">Export</button>
+    }
+
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script type="text/javascript" src="/js/table2excel.js"></script>
+    <script>
+        function showMessage() {
+            alert("Can not export");
+        }
+    </script>
+
+</div>

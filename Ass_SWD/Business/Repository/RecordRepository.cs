@@ -1,8 +1,12 @@
-﻿namespace Ass_SWD.Bussiness.Repository
+
+﻿using Ass_SWD.Bussiness.Interface;
+using Ass_SWD.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace Ass_SWD.Bussiness.Repository
+
 {
-    using Ass_SWD.Bussiness.Interface;
-    using Ass_SWD.Models;
-    using Microsoft.EntityFrameworkCore;
+    
 
     public class RecordRepository : IRecordRepository
 	{

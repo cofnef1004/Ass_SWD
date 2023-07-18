@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
 namespace Ass_SWD.Models
@@ -15,5 +16,6 @@ namespace Ass_SWD.Models
         public string Description { get; set; } = null!;
 
         public virtual ICollection<Payment> Payments { get; set; }
+
     }
 }

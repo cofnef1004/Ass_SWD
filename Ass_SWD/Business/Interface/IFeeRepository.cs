@@ -1,4 +1,8 @@
-﻿namespace Ass_SWD.Business.Interface
+
+﻿using Ass_SWD.Models;
+
+namespace Ass_SWD.Bussiness.Interface
+
 {
 	using Ass_SWD.Models;
 

@@ -1,5 +1,5 @@
 ﻿@page "/Category/Add"
-@model Ass_SWD.Pages.Category.Pages_Category_Add
+@model Ass_SWD.Pages.Category.AddModel
 @{
     Layout = "_MainLayout";
 }
@@ -69,7 +69,7 @@
                     <h2 class="text-center mb-0">Add New Category</h2>
                 </div>
                 <div class="card-body">
-                    <form asp-page="Add" method="post">
+                    <form asp-page="/Category/Add">
                         <div class="form-group">
                             <label for="name">Category Name:</label>
                             <input type="text" class="form-control" id="name" name="Name">

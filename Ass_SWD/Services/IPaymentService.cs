@@ -1,6 +1,6 @@
 ﻿using Ass_SWD.Models;
 
-namespace Ass_SWD.Business.Interface
+namespace Ass_SWD.Services
 {
     public interface IPaymentService
     {

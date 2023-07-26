@@ -58,7 +58,7 @@ namespace Ass_SWD.Pages
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Patients");
         }
 
         private bool PatientExists(int id)

@@ -283,6 +283,7 @@ namespace Ass_SWD.Models
             OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+		partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

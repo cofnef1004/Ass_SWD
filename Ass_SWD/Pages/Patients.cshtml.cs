@@ -13,11 +13,12 @@ namespace Ass_SWD.Pages
     public class PatientsModel : PageModel
     {
         IPatientRepository _patientRepository;
-
-        public List<Patient> patients;
+        public IList<Models.Patient> patients { get; set; } = default!;
+       
 
         [BindProperty]
         public Patient Input { get; set; }
+        public int Id;
 
         public PatientsModel(IPatientRepository patientRepository)
         {
@@ -57,24 +58,35 @@ namespace Ass_SWD.Pages
             }
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
+       /* public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
-            var patient = _patientRepository.GetPatientById(id);
+            *//*var pat = _patientRepository.GetPatientById(id);
 
-            if (patient == null)
+            if (pat == null)
             {
                 return NotFound();
-            }
+            }*//*
 
-            try
-            {
-                _patientRepository.DeletePatient(patient);
-                return RedirectToPage();
-            }
-            catch (Exception ex)
+            //try
+           // {
+                using(var db = new MyStoreContext())
+                {
+                    Models.Patient pate = db.Patients.FirstOrDefault(p => p.PatientId == Id);
+                    //var pate= _patientRepository.GetPatientById(id);
+                   
+                db.Patients.Remove(pate);
+                    db.SaveChanges();
+                    patients = db.Patients.Include(p=> p.PatientId).Where(p => p.PatientId == Id).ToList();
+                    return RedirectToPage("/Patients");
+                }
+               // _patientRepository.DeletePatient(pat);
+                
+               // return RedirectToPage();
+           // }
+           *//* catch (Exception ex)
             {
                 return Page();
-            }
-        }
+            }*//*
+        }*/
     }
 }
